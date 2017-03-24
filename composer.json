@@ -1,0 +1,21 @@
+{
+    "name": "tintnaingwin/email-checker",
+    "description": "Laravel Package To Validate If An Email Address Exists Without Sending An Email",
+    "license": "MIT",
+    "keyword": ["laravel","email","validate","SMTP"],
+    "authors": [
+        {
+            "name": "Tint Naing Win",
+            "email": "amigo.k8@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tintnaingwin\\EmailChecker\\" : "src/"
+        }
+    }
+}
