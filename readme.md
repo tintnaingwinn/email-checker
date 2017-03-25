@@ -25,7 +25,7 @@ To use facade you have to add this line in `config/app.php` in aliases array
 ```
 
 #### Example
-To add 'email-checker' at email rule
+To add 'email_checker' at email rule
 ```php
   // [your site path]/app/Http/Requests/RegisterRequest.php
  public function rules()
