@@ -48,4 +48,4 @@ To add 'email-checker' at email rule
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/tintnaingwinn/email-checker/blob/master/LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/tintnaingwinn/email-checker/blob/master/LICENSE.txt) for more information.
