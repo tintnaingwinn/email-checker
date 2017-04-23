@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/real-email.iml" filepath="$PROJECT_DIR$/.idea/real-email.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/email-checker.iml" filepath="$PROJECT_DIR$/.idea/email-checker.iml" />
     </modules>
   </component>
 </project>

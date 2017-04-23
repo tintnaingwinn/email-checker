@@ -32,7 +32,7 @@ class EmailChecker {
 
     /**
      * SMTP Port
-     * @var $port
+     * @var $port 25
      */
     protected $port = 25;
 
@@ -54,8 +54,14 @@ class EmailChecker {
 
     public function check($email = false)
     {
+        $disposable = json_decode(file_get_contents(__DIR__.'/json/list.json'),true);
+
         if ($email) {
             $this->setEmail($email);
+        }
+
+        if (in_array($this->domain, $disposable)){
+            return false;
         }
 
         $mxs = [];

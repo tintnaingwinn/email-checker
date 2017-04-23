@@ -3,9 +3,14 @@ Validate Email for Laravel
 [![Laravel 5.4](https://img.shields.io/badge/Laravel-5.4-orange.svg?style=flat-square)](http://laravel.com)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
+### Features
 
-Quick Installation
-------------------
+This package supports:
+
+*   Validate with SMTP
+*   Support for Disposable Email
+
+### Quick Installation
 
 ```
 composer require tintnaingwin/emailchecker
@@ -45,7 +50,10 @@ To add 'email_checker' at email rule
  EmailChecker::check('me@example.com');
 ```
 
+### Credit
+  - Disposable Email List
+    * [Ilya Volodarsky](https://github.com/ivolo/disposable-email-domains/blob/master/index.json)
 
-## License
+### License
 
 The MIT License (MIT). Please see [License File](https://github.com/tintnaingwinn/email-checker/blob/master/LICENSE.txt) for more information.
