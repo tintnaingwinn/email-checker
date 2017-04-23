@@ -1,5 +1,5 @@
 {
-    "name": "tintnaingwin/email-checker",
+    "name": "cnvs/email-checker",
     "description": "Laravel Package To Validate If An Email Address Exists Without Sending An Email",
     "license": "MIT",
     "keyword": ["laravel","email","validate","SMTP"],

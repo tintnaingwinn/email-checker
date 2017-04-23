@@ -75,7 +75,7 @@ class EmailChecker {
         // connect to SMTP
         while(list($host) = each($mxs))
         {
-            if ($this->socket = fsockopen($host, $this->port, $errno, $errstr, (float) $timeout))
+            if ($this->socket = @fsockopen($host, $this->port, $errno, $errstr, (float) $timeout))
             {
                 stream_set_timeout($this->socket, $this->max_read_time);
                 break;
@@ -116,6 +116,9 @@ class EmailChecker {
 
             $this->quit();
 
+        }else
+        {
+            $result = false;
         }
 
         return $result;
