@@ -13,7 +13,7 @@ This package supports:
 ### Quick Installation
 
 ```
-composer require tintnaingwin/emailchecker
+composer require tintnaingwin/email-checker
 ```
 
 Once this operation is complete, simply add the service provider class to your project's `config/app.php` file:
