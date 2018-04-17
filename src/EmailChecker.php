@@ -79,7 +79,7 @@ class EmailChecker {
         $timeout = $this->max_conn_time/(count($hosts)>0 ? count($hosts) : 1);
 
         // connect to SMTP
-        while(list($host) = each($mxs))
+        foreach ($mxs as $host => $value)
         {
             if ($this->socket = @fsockopen($host, $this->port, $errno, $errstr, (float) $timeout))
             {
