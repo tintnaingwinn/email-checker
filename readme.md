@@ -11,6 +11,10 @@ This package supports:
 *   Validate with SMTP
 *   Support for Disposable Email
 
+
+**Notice** -  That extracts the MX records from the email address and connect with the mail server to make sure the mail address accurately exist. So it may be slow loading time in local and some co-operate MX records take a long time .  
+
+
 ### Quick Installation
 
 ```
