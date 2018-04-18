@@ -1,5 +1,5 @@
-Validate Email for Laravel
-=================
+#Validate Email for Laravel
+
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -67,3 +67,12 @@ vendor/bin/phpunit
 ### License
 
 The MIT License (MIT). Please see [License File](https://github.com/tintnaingwinn/email-checker/blob/master/LICENSE.txt) for more information.
+
+
+[ico-version]: https://img.shields.io/packagist/v/tintnaingwin/email-checker.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/tintnaingwin/email-checker.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/tintnaingwin/email-checker
+[link-downloads]: https://packagist.org/packages/tintnaingwin/email-checker
+[link-author]: https://github.com/tintnaingwinn
