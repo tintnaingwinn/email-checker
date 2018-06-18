@@ -2,8 +2,8 @@
 
 namespace Tintnaingwin\EmailChecker;
 
-use Validator;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class EmailCheckerServiceProvider extends ServiceProvider
 {
@@ -14,10 +14,11 @@ class EmailCheckerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('email_checker', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('email_checker', function ($attribute, $value, $parameters, $validator) {
             $email = new EmailChecker();
+
             return $email->check($value);
-        },'Invalid Email Address');
+        }, 'Invalid Email Address');
     }
 
     /**
@@ -27,6 +28,5 @@ class EmailCheckerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }
