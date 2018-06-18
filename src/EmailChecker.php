@@ -3,64 +3,63 @@
 namespace Tintnaingwin\EmailChecker;
 
 /**
- * Class EmailChecker
- *
- * @package Titnnaingwin\EmailChecker
+ * Class EmailChecker.
  */
-class EmailChecker {
-
+class EmailChecker
+{
     /**
-     * PHP Socket
-     * @var  $socket
+     * PHP Socket.
+     *
+     * @var 
      */
     protected $socket;
 
     /**
-     * @var $user
+     * @var
      */
     protected $user;
 
     /**
-     * @var $domain
+     * @var
      */
     protected $domain;
 
     /**
-     * @var $from_email
+     * @var
      */
     protected $from_email = 'me@example.com';
 
     /**
-     * SMTP Port
-     * @var $port 25
+     * SMTP Port.
+     *
+     * @var 25
      */
     protected $port = 25;
 
     /**
-     * Maximum Connection Time to an MTA
+     * Maximum Connection Time to an MTA.
      */
     protected $max_conn_time = 30;
 
     /**
-     * Maximum Read Time from socket
+     * Maximum Read Time from socket.
      */
     protected $max_read_time = 5;
 
     /**
-     * @var $nameServers
+     * @var
      */
     protected $nameServers = ['192.168.0.1'];
 
-
     public function check($email = false)
     {
-        $disposable = json_decode(file_get_contents(__DIR__.'/json/list.json'),true);
+        $disposable = json_decode(file_get_contents(__DIR__.'/json/list.json'), true);
 
         if ($email) {
             $this->setEmail($email);
         }
 
-        if (in_array($this->domain, $disposable)){
+        if (in_array($this->domain, $disposable)) {
             return false;
         }
 
@@ -68,7 +67,7 @@ class EmailChecker {
 
         list($hosts, $mxRecords) = $this->queryMX($this->domain);
 
-        for($n=0; $n < count($hosts); $n++){
+        for ($n = 0; $n < count($hosts); $n++) {
             $mxs[$hosts[$n]] = $mxRecords[$n];
         }
 
@@ -76,36 +75,32 @@ class EmailChecker {
 
         array_push($mxs, $this->domain);
 
-        $timeout = $this->max_conn_time/(count($hosts)>0 ? count($hosts) : 1);
+        $timeout = $this->max_conn_time / (count($hosts) > 0 ? count($hosts) : 1);
 
         // connect to SMTP
-        foreach ($mxs as $host => $value)
-        {
-            if ($this->socket = @fsockopen($host, $this->port, $errno, $errstr, (float) $timeout))
-            {
+        foreach ($mxs as $host => $value) {
+            if ($this->socket = @fsockopen($host, $this->port, $errno, $errstr, (float) $timeout)) {
                 stream_set_timeout($this->socket, $this->max_read_time);
                 break;
             }
         }
 
-        if ($this->socket)
-        {
+        if ($this->socket) {
             $reply = fread($this->socket, 2082);
 
             preg_match('/^([0-9]{3})/ims', $reply, $matches);
             $code = isset($matches[1]) ? $matches[1] : '';
 
-            if($code != '220')
-            {
+            if ($code != '220') {
                 $result = false;
             }
 
-            $this->send("helo hi");
+            $this->send('helo hi');
 
-            $this->send("MAIL FROM: <".$this->from_email.">");
+            $this->send('MAIL FROM: <'.$this->from_email.'>');
 
             // ask of rcpt
-            $reply = $this->send("RCPT TO: <".$email.">");
+            $reply = $this->send('RCPT TO: <'.$email.'>');
 
             // parse code and message
             preg_match('/^([0-9]{3}) /ims', $reply, $matches);
@@ -121,15 +116,12 @@ class EmailChecker {
             }
 
             $this->quit();
-
-        }else
-        {
+        } else {
             $result = false;
         }
 
         return $result;
     }
-
 
     protected function send($msg)
     {
@@ -144,7 +136,8 @@ class EmailChecker {
     {
         $parts = explode('@', $email);
         $domain = array_pop($parts);
-        $user= implode('@', $parts);
+        $user = implode('@', $parts);
+
         return [$user, $domain];
     }
 
@@ -159,11 +152,9 @@ class EmailChecker {
     {
         $hosts = [];
         $mxRecords = [];
-        if (function_exists('getmxrr'))
-        {
+        if (function_exists('getmxrr')) {
             getmxrr($domain, $hosts, $mxRecords);
-        } else
-        {
+        } else {
             // windows, we need Net_DNS
             require_once 'Net/DNS.php';
 
@@ -172,31 +163,29 @@ class EmailChecker {
             // nameservers to query
             $resolver->nameServers = $this->nameServers;
             $resp = $resolver->query($domain, 'MX');
-            if ($resp)
-            {
-                foreach($resp->answer as $answer)
-                {
+            if ($resp) {
+                foreach ($resp->answer as $answer) {
                     $hosts[] = $answer->exchange;
                     $mxRecords[] = $answer->preference;
                 }
             }
         }
-        return array($hosts, $mxRecords);
+
+        return [$hosts, $mxRecords];
     }
 
     protected function microtime_float()
     {
-        list($usec, $sec) = explode(" ", microtime());
-        return ((float)$usec + (float)$sec);
+        list($usec, $sec) = explode(' ', microtime());
+
+        return (float) $usec + (float) $sec;
     }
 
     protected function quit()
     {
         // quit
-        $this->send("quit");
+        $this->send('quit');
         // close socket
         fclose($this->socket);
     }
-
 }
-

@@ -3,10 +3,10 @@
  * Created by PhpStorm.
  * User: tintnaingwin
  * Date: 4/17/18
- * Time: 2:47 PM
+ * Time: 2:47 PM.
  */
-use Tintnaingwin\EmailChecker\EmailChecker;
 use PHPUnit\Framework\TestCase;
+use Tintnaingwin\EmailChecker\EmailChecker;
 
 class EmailCheckerTest extends TestCase
 {
@@ -15,7 +15,6 @@ class EmailCheckerTest extends TestCase
     /**
      * EmailCheckerTest constructor.
      */
-
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
@@ -36,5 +35,4 @@ class EmailCheckerTest extends TestCase
     {
         $this->assertFalse($this->email_checker->check('amigo.k8@0-mail.com'));
     }
-
 }

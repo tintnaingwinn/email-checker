@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'email-check' => 'Invalid Email Address'
+  'email-check' => 'Invalid Email Address',
 ];
