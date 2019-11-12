@@ -2,8 +2,10 @@
 
 namespace Tintnaingwin\EmailChecker;
 
-use Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Tintnaingwin\EmailCheckerPHP\EmailChecker as EmailCheckerPHP;
+use Tintnaingwin\EmailChecker\Facades\EmailChecker;
 
 class EmailCheckerServiceProvider extends ServiceProvider
 {
@@ -14,10 +16,15 @@ class EmailCheckerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('email_checker', function($attribute, $value, $parameters, $validator) {
-            $email = new EmailChecker();
-            return $email->check($value);
-        },'Invalid Email Address');
+        $this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/emailChecker'),
+        ]);
+
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang/', 'emailChecker');
+
+        Validator::extend('email_checker', function ($attribute, $value, $parameters, $validator) {
+            return EmailChecker::check($value);
+        }, __('emailChecker::messages.email'));
     }
 
     /**
@@ -27,6 +34,12 @@ class EmailCheckerServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton('email-checker-php', function ($app) {
+            return new EmailCheckerPHP();
+        });
 
+        $this->app->singleton('email-checker', function ($app) {
+            return new EmailCheckerManager($app['email-checker-php']);
+        });
     }
 }

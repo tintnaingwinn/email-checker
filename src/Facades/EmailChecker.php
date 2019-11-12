@@ -1,9 +1,16 @@
 <?php
+
 namespace Tintnaingwin\EmailChecker\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class EmailChecker extends Facade{
+/**
+ * @method bool check(string $email)
+ *
+ * @see \Tintnaingwin\EmailChecker\EmailCheckerManager
+ */
+class EmailChecker extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -11,6 +18,6 @@ class EmailChecker extends Facade{
      */
     protected static function getFacadeAccessor()
     {
-        return 'Tintnaingwin\EmailChecker\EmailChecker';
+        return 'email-checker';
     }
 }
